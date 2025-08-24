@@ -403,12 +403,12 @@ export default function Agency() {
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-700">
+              <div className="relative mt-8 lg:mt-0">
+                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-4 sm:p-6 lg:p-8 border border-white/10 shadow-2xl transform rotate-0 lg:rotate-3 hover:rotate-0 transition-transform duration-700">
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl"></div>
                   <div className="relative space-y-6">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold text-white">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
+                      <h3 className="text-lg sm:text-xl font-bold text-white">
                         Agency Highlights
                       </h3>
                       <Badge className="bg-green-500/20 text-green-300 border-green-400/30">
