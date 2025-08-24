@@ -549,28 +549,28 @@ export default function Agency() {
       {/* Artist Roster Section */}
       <section
         id="artist-roster"
-        className="py-20 bg-black relative overflow-hidden"
+        className="py-12 sm:py-16 lg:py-20 bg-black relative overflow-hidden"
       >
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-900/20 to-purple-900/20"></div>
         </div>
 
         <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white">
               Our Elite{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Roster
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Meet the extraordinary artists who define the future of electronic
               music.
             </p>
           </div>
 
           {/* Artist Grid - Optimized for CRM Management */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {artists.map((artist, index) => (
               <Card
                 key={artist.id}
@@ -578,7 +578,7 @@ export default function Agency() {
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 {/* Compact Image Section */}
-                <div className="relative h-48 sm:h-52 lg:h-48 overflow-hidden">
+                <div className="relative h-40 sm:h-48 lg:h-52 xl:h-48 overflow-hidden">
                   <img
                     src={artist.image}
                     alt={artist.name}
@@ -587,32 +587,32 @@ export default function Agency() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
 
                   {/* Floating Badges */}
-                  <div className="absolute top-3 right-3">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
                     <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/30 text-xs backdrop-blur-sm">
                       <Users className="w-3 h-3 mr-1" />
                       {artist.followers}
                     </Badge>
                   </div>
 
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
                     <Badge className="bg-purple-500/20 text-purple-300 border-purple-400/30 text-xs backdrop-blur-sm">
                       {artist.genre}
                     </Badge>
                   </div>
 
                   {/* Artist Name Overlay */}
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <h3 className="text-lg font-bold text-white truncate">
+                  <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3">
+                    <h3 className="text-base sm:text-lg font-bold text-white truncate">
                       {artist.name}
                     </h3>
-                    <p className="text-sm text-gray-300 truncate">
+                    <p className="text-xs sm:text-sm text-gray-300 truncate">
                       {artist.realName}
                     </p>
                   </div>
                 </div>
 
                 {/* Compact Content Section */}
-                <CardContent className="p-4 space-y-3">
+                <CardContent className="p-3 sm:p-4 space-y-2 sm:space-y-3">
                   {/* Description */}
                   <p className="text-gray-300 text-sm leading-relaxed line-clamp-2">
                     {artist.description}
