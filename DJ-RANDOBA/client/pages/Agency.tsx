@@ -839,13 +839,13 @@ export default function Agency() {
           {/* Partnership Request Form */}
           <div className="max-w-4xl mx-auto">
             <Card className="bg-white/5 backdrop-blur-sm border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
-              <div className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 p-8 text-white text-center relative overflow-hidden">
+              <div className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 p-4 sm:p-6 lg:p-8 text-white text-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/90 via-purple-600/90 to-pink-600/90"></div>
                 <div className="relative">
-                  <h3 className="text-3xl font-bold mb-4">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4">
                     Join the RANDOBA Family
                   </h3>
-                  <p className="text-xl opacity-90">
+                  <p className="text-sm sm:text-lg lg:text-xl opacity-90">
                     Looking for bigger stages, higher fees, and
                     greater recognition? Apply now - and receive your
                     custom career growth
