@@ -308,7 +308,7 @@ export default function Agency() {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
-      <section className="relative min-h-[80vh] sm:min-h-screen overflow-hidden bg-black -mt-16 pt-16">
+      <section className="relative min-h-[100vh] sm:min-h-screen overflow-hidden bg-black -mt-16 pt-16">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -328,24 +328,24 @@ export default function Agency() {
           <div className="absolute top-60 right-40 w-3 h-3 bg-yellow-400 rounded-full animate-pulse opacity-50"></div>
         </div>
 
-        <div className="relative container mx-auto px-4 py-16 sm:py-20 lg:py-32 min-h-[80vh] sm:min-h-screen flex items-center z-10">
+        <div className="relative container mx-auto px-4 py-8 sm:py-16 lg:py-32 min-h-[100vh] sm:min-h-screen flex items-center z-10">
           <div className="max-w-6xl mx-auto w-full">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8 text-white">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="space-y-6 sm:space-y-8 text-white text-center lg:text-left">
                 <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/30 hover:bg-cyan-500/30 backdrop-blur-sm">
                   <Users className="w-3 h-3 mr-1" />
                   Elite Artist Representation
                 </Badge>
 
-                <div className="space-y-6">
-                  <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                <div className="space-y-4 sm:space-y-6">
+                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight">
                     <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
                       RANDOBA
                     </span>
                     <br />
                     <span className="text-white">Artist Agency</span>
                   </h1>
-                  <p className="text-xl text-gray-200 max-w-lg leading-relaxed">
+                  <p className="text-base sm:text-lg lg:text-xl text-gray-200 max-w-full lg:max-w-lg leading-relaxed">
                     Your talent is flawless - now it's time to turn it
                     into a powerful brand. <br />
                     We take DJs beyond their usual stages and fees,
@@ -383,7 +383,7 @@ export default function Agency() {
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-3 gap-6 pt-8">
+                <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-6 sm:pt-8">
                   {[
                     { number: "50+", label: "Elite Artists", icon: Users },
                     { number: "1000+", label: "Global Events", icon: Music },
@@ -391,13 +391,13 @@ export default function Agency() {
                   ].map((stat, index) => (
                     <div key={index} className="text-center group">
                       <div className="relative">
-                        <stat.icon className="w-8 h-8 text-cyan-400 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                        <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300" />
                         <div className="absolute inset-0 bg-cyan-400/20 blur-xl rounded-full group-hover:bg-cyan-400/40 transition-all duration-300"></div>
                       </div>
-                      <div className="text-3xl font-bold text-white">
+                      <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
                         {stat.number}
                       </div>
-                      <div className="text-sm text-gray-300">{stat.label}</div>
+                      <div className="text-xs sm:text-sm text-gray-300">{stat.label}</div>
                     </div>
                   ))}
                 </div>
