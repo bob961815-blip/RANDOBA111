@@ -719,7 +719,7 @@ export default function Agency() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2">
-              🔗 Powered by Bitrix24 CRM Integration
+              ���� Powered by Bitrix24 CRM Integration
             </p>
           </div>
 
@@ -750,12 +750,10 @@ export default function Agency() {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              <p>
-                Partnership with RANDOBA isn't just a formality - it's
-                your personal career launchpad. We turn your ambitions
-                into real results, opening doors to a world where your
-                growth is inevitable.
-              </p>
+              Partnership with RANDOBA isn't just a formality - it's
+              your personal career launchpad. We turn your ambitions
+              into real results, opening doors to a world where your
+              growth is inevitable.
             </p>
           </div>
 
@@ -801,16 +799,11 @@ export default function Agency() {
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
                 <CardContent className="p-8">
                   <h4 className="text-xl font-bold text-cyan-400 mb-4">
-                    <p>Struggling to break into bigger stages?</p>
+                    Struggling to break into bigger stages?
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    <p>
-                      We connect you to prestigious clubs, festivals,
-                      and premium events where top-tier artists perform.
-                    </p>
-                    <p>
-                      <br />
-                    </p>
+                    We connect you to prestigious clubs, festivals,
+                    and premium events where top-tier artists perform.
                   </p>
                 </CardContent>
               </Card>
@@ -818,17 +811,12 @@ export default function Agency() {
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
                 <CardContent className="p-8">
                   <h4 className="text-xl font-bold text-cyan-400 mb-4">
-                    <p>Your tracks aren't getting noticed?</p>
+                    Your tracks aren't getting noticed?
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    <p>
-                      We turn your style into a powerful brand and
-                      promote it across social media so you're seen and
-                      heard.
-                    </p>
-                    <p>
-                      <br />
-                    </p>
+                    We turn your style into a powerful brand and
+                    promote it across social media so you're seen and
+                    heard.
                   </p>
                 </CardContent>
               </Card>
@@ -836,17 +824,12 @@ export default function Agency() {
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
                 <CardContent className="p-8">
                   <h4 className="text-xl font-bold text-cyan-400 mb-4">
-                    <p>No stable gigs or income?</p>
+                    No stable gigs or income?
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    <p>
-                      We take care of booking, strategy, and full-scale
-                      artist management so your music brings both
-                      recognition and profit.
-                    </p>
-                    <p>
-                      <br />
-                    </p>
+                    We take care of booking, strategy, and full-scale
+                    artist management so your music brings both
+                    recognition and profit.
                   </p>
                 </CardContent>
               </Card>
@@ -863,11 +846,9 @@ export default function Agency() {
                     Join the RANDOBA Family
                   </h3>
                   <p className="text-xl opacity-90">
-                    <p>
-                      Looking for bigger stages, higher fees, and
-                      greater recognition? Apply now - and receive your
-                      custom career growth
-                    </p>
+                    Looking for bigger stages, higher fees, and
+                    greater recognition? Apply now - and receive your
+                    custom career growth
                   </p>
                 </div>
               </div>
@@ -932,7 +913,7 @@ export default function Agency() {
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-200 mb-2">
-                        <p>Phone Number *</p>
+                        Phone Number *
                       </label>
                       <Input
                         type="tel"
