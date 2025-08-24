@@ -782,26 +782,26 @@ export default function Agency() {
           </div>
 
           {/* FAQ Section */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="text-center mb-12">
-              <h3 className="text-3xl lg:text-4xl font-bold mb-6 text-white">
+          <div className="max-w-4xl mx-auto mb-8 sm:mb-12 lg:mb-16">
+            <div className="text-center mb-6 sm:mb-8 lg:mb-12">
+              <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold mb-4 sm:mb-6 text-white px-4 sm:px-0">
                 We don't just book gigs -{" "}
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                   we create legends
                 </span>
               </h3>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
                 Your success is our mission. Here's how we transform talented DJs into industry icons with strategic career development and premium opportunities.
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                <CardContent className="p-8">
-                  <h4 className="text-xl font-bold text-cyan-400 mb-4">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <h4 className="text-lg sm:text-xl font-bold text-cyan-400 mb-3 sm:mb-4">
                     Struggling to break into bigger stages?
                   </h4>
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                     We connect you to prestigious clubs, festivals,
                     and premium events where top-tier artists perform.
                   </p>
@@ -809,11 +809,11 @@ export default function Agency() {
               </Card>
 
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                <CardContent className="p-8">
-                  <h4 className="text-xl font-bold text-cyan-400 mb-4">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <h4 className="text-lg sm:text-xl font-bold text-cyan-400 mb-3 sm:mb-4">
                     Your tracks aren't getting noticed?
                   </h4>
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                     We turn your style into a powerful brand and
                     promote it across social media so you're seen and
                     heard.
@@ -822,11 +822,11 @@ export default function Agency() {
               </Card>
 
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                <CardContent className="p-8">
-                  <h4 className="text-xl font-bold text-cyan-400 mb-4">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <h4 className="text-lg sm:text-xl font-bold text-cyan-400 mb-3 sm:mb-4">
                     No stable gigs or income?
                   </h4>
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                     We take care of booking, strategy, and full-scale
                     artist management so your music brings both
                     recognition and profit.
