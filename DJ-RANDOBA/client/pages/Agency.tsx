@@ -100,18 +100,8 @@ export default function Agency() {
     }
   };
 
-  // Calendar state
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [hoveredEvent, setHoveredEvent] = useState<CalendarEvent | null>(null);
-  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
-  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
-  const [bookingModalOpen, setBookingModalOpen] = useState(false);
-  const [selectedBookingEvent, setSelectedBookingEvent] =
-    useState<CalendarEvent | null>(null);
   const [artistBookingModalOpen, setArtistBookingModalOpen] = useState(false);
-  const [artistSelectionModalOpen, setArtistSelectionModalOpen] = useState(false);
   const [selectedArtist, setSelectedArtist] = useState<any>(null);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
