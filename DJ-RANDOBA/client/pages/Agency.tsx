@@ -11,9 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "../contexts/AuthContext";
-import { BookingModal } from "../components/BookingModal";
 import { ArtistBookingModal } from "../components/ArtistBookingModal";
-import { ArtistSelectionModal } from "../components/ArtistSelectionModal";
 import {
   Users,
   Star,
