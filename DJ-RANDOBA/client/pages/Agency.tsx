@@ -801,10 +801,16 @@ export default function Agency() {
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
                 <CardContent className="p-8">
                   <h4 className="text-xl font-bold text-cyan-400 mb-4">
-                    What makes RANDOBA different from other agencies?
+                    <p>Struggling to break into bigger stages?</p>
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    We don't just find you gigs - we craft your entire career trajectory. Our 360° approach includes brand development, strategic partnerships, premium event placement, and personal career coaching. While others book shows, we build empires.
+                    <p>
+                      We connect you to prestigious clubs, festivals,
+                      and premium events where top-tier artists perform.
+                    </p>
+                    <p>
+                      <br />
+                    </p>
                   </p>
                 </CardContent>
               </Card>
@@ -812,10 +818,17 @@ export default function Agency() {
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
                 <CardContent className="p-8">
                   <h4 className="text-xl font-bold text-cyan-400 mb-4">
-                    How do you ensure I get the right opportunities?
+                    <p>Your tracks aren't getting noticed?</p>
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    Our extensive network spans global festivals, premium clubs, and exclusive private events. We match artists based on their unique style, career goals, and growth potential - not just availability. Every opportunity is strategically chosen to elevate your brand and expand your fanbase.
+                    <p>
+                      We turn your style into a powerful brand and
+                      promote it across social media so you're seen and
+                      heard.
+                    </p>
+                    <p>
+                      <br />
+                    </p>
                   </p>
                 </CardContent>
               </Card>
@@ -823,10 +836,17 @@ export default function Agency() {
               <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
                 <CardContent className="p-8">
                   <h4 className="text-xl font-bold text-cyan-400 mb-4">
-                    What kind of support can I expect as a RANDOBA artist?
+                    <p>No stable gigs or income?</p>
                   </h4>
                   <p className="text-gray-300 leading-relaxed">
-                    You get a dedicated artist manager, 24/7 support, media training, brand development, social media strategy, and exclusive industry connections. We handle negotiations, logistics, and career planning so you can focus on what you do best - creating incredible music and unforgettable performances.
+                    <p>
+                      We take care of booking, strategy, and full-scale
+                      artist management so your music brings both
+                      recognition and profit.
+                    </p>
+                    <p>
+                      <br />
+                    </p>
                   </p>
                 </CardContent>
               </Card>
