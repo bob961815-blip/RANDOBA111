@@ -913,6 +913,12 @@ export default function Agency() {
         </div>
       </section>
 
+      {/* Artist Booking Modal */}
+      <ArtistBookingModal
+        isOpen={artistBookingModalOpen}
+        onClose={() => setArtistBookingModalOpen(false)}
+        artist={selectedArtist}
+      />
     </div>
   );
 }
