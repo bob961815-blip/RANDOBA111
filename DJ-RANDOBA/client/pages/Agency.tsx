@@ -30,14 +30,6 @@ import {
   Video,
   Youtube,
   ExternalLink,
-  Calendar as CalendarIcon,
-  Clock,
-  MapPin,
-  ChevronLeft,
-  ChevronRight,
-  Headphones,
-  Volume2,
-  Mic,
 } from "lucide-react";
 
 
