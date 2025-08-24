@@ -475,18 +475,18 @@ export default function Agency() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4 group p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
-                    <Heart className="w-6 h-6 text-white" />
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 group p-4 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25 mx-auto sm:mx-0">
+                    <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
                       Artist Development
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                       From your first original tracks to a unique
                       image - we help you stand out and secure your
                       spot at the top. We build a personalized path to
@@ -495,15 +495,15 @@ export default function Agency() {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4 group p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/25">
-                    <Globe className="w-6 h-6 text-white" />
+                <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 group p-4 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/25 mx-auto sm:mx-0">
+                    <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
                       Access to New Stages
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                       We connect you with prestigious festivals,
                       clubs, and premium events that thousands of DJs
                       aspire to play.
@@ -511,15 +511,15 @@ export default function Agency() {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4 group p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/25">
-                    <Zap className="w-6 h-6 text-white" />
+                <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 group p-4 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/25 mx-auto sm:mx-0">
+                    <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
                       Ongoing Growth
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                       Your focus is the music. Our focus is your
                       progress, new contracts, and growing performance
                       fees.
