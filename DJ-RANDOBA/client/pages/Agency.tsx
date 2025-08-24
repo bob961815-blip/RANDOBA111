@@ -853,9 +853,9 @@ export default function Agency() {
                 </div>
               </div>
 
-              <CardContent className="p-8 bg-gray-900/50">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
+              <CardContent className="p-4 sm:p-6 lg:p-8 bg-gray-900/50">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-200 mb-2">
                         Full Name *
