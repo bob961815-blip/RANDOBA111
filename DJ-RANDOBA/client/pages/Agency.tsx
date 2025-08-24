@@ -700,9 +700,9 @@ export default function Agency() {
           </div>
 
           {/* Load More Artists - CRM Integration Ready */}
-          <div className="text-center mt-12">
-            <div className="inline-flex items-center space-x-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-3">
-              <span className="text-gray-300 text-sm">
+          <div className="text-center mt-8 sm:mt-12">
+            <div className="flex flex-col sm:inline-flex sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-3 sm:px-6">
+              <span className="text-gray-300 text-xs sm:text-sm">
                 Showing {artists.length} of {totalArtists}+ artists
               </span>
               <Button
@@ -727,7 +727,7 @@ export default function Agency() {
       </section>
 
       {/* Terms of Cooperation Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-radial from-cyan-500/10 to-transparent rounded-full"></div>
           <div className="absolute bottom-20 left-20 w-72 h-72 bg-gradient-radial from-purple-500/10 to-transparent rounded-full"></div>
@@ -743,13 +743,13 @@ export default function Agency() {
         </div>
 
         <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white">
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 RANDOBA - partnership that drives your career
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Partnership with RANDOBA isn't just a formality - it's
               your personal career launchpad. We turn your ambitions
               into real results, opening doors to a world where your
@@ -757,7 +757,7 @@ export default function Agency() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
             {cooperationTerms.map((term, index) => (
               <Card
                 key={index}
@@ -765,15 +765,15 @@ export default function Agency() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
-                    <term.icon className="w-8 h-8 text-white" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
+                    <term.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
                   </div>
-                  <CardTitle className="text-xl text-white">
+                  <CardTitle className="text-lg sm:text-xl text-white">
                     {term.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <CardDescription className="text-gray-300 leading-relaxed">
+                  <CardDescription className="text-sm sm:text-base text-gray-300 leading-relaxed">
                     {term.description}
                   </CardDescription>
                 </CardContent>
