@@ -337,9 +337,8 @@ export function ArtistBookingModal({ isOpen, onClose, artist, preSelectedDate }:
               <div className="flex justify-between">
                 <Button
                   type="button"
-                  variant="outline"
                   onClick={handleClose}
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:from-cyan-600 hover:to-purple-700"
                 >
                   Cancel
                 </Button>
