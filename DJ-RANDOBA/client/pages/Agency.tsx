@@ -42,22 +42,6 @@ import {
   Mic,
 } from "lucide-react";
 
-interface CalendarEvent {
-  id: string;
-  title: string;
-  instructor: string;
-  date: Date;
-  time: string;
-  duration: string;
-  location: string;
-  price: number;
-  spotsLeft: number;
-  totalSpots: number;
-  level: "Beginner" | "Intermediate" | "Advanced";
-  category: "Workshop" | "Masterclass" | "Live Event" | "Course";
-  description: string;
-  rating: number;
-}
 
 export default function Agency() {
   const { user } = useAuth();
