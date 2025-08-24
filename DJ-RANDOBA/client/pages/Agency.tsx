@@ -40,7 +40,7 @@ export default function Agency() {
     name: "",
     email: "",
     artistName: "",
-    genre: "",
+    phone: "",
     message: "",
   });
 
@@ -99,7 +99,7 @@ export default function Agency() {
    *    - ID → Deal/Contact ID
    *    - name → Artist Stage Name
    *    - realName → Contact Full Name
-   *    - genre → Custom Field "Genre"
+   *    - genre �� Custom Field "Genre"
    *    - followers → Custom Field "Social Following"
    *    - bookingRate → Deal Amount
    *    - status → Deal Stage
@@ -863,8 +863,11 @@ export default function Agency() {
                     Join the RANDOBA Family
                   </h3>
                   <p className="text-xl opacity-90">
-                    Ready to take your career to the next level? Let's create
-                    something extraordinary together.
+                    <p>
+                      Looking for bigger stages, higher fees, and
+                      greater recognition? Apply now - and receive your
+                      custom career growth
+                    </p>
                   </p>
                 </div>
               </div>
@@ -929,19 +932,20 @@ export default function Agency() {
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-200 mb-2">
-                        Primary Genre *
+                        <p>Phone Number *</p>
                       </label>
                       <Input
+                        type="tel"
                         required
-                        value={formData.genre}
+                        value={formData.phone}
                         onChange={(e) =>
                           setFormData((prev) => ({
                             ...prev,
-                            genre: e.target.value,
+                            phone: e.target.value,
                           }))
                         }
                         className="bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-cyan-400/50"
-                        placeholder="e.g. Progressive House, Techno"
+                        placeholder="+1 (555) 123-4567"
                       />
                     </div>
                   </div>
