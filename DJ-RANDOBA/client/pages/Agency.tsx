@@ -978,10 +978,12 @@ export default function Agency() {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Partnership with RANDOBA isn't just a formality - it's
-              your personal career launchpad. We turn your ambitions
-              into real results, opening doors to a world where your
-              growth is inevitable.
+              <p>
+                Partnership with RANDOBA isn't just a formality - it's
+                your personal career launchpad. We turn your ambitions
+                into real results, opening doors to a world where your
+                growth is inevitable.
+              </p>
             </p>
           </div>
 
