@@ -11,9 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "../contexts/AuthContext";
-import { BookingModal } from "../components/BookingModal";
 import { ArtistBookingModal } from "../components/ArtistBookingModal";
-import { ArtistSelectionModal } from "../components/ArtistSelectionModal";
 import {
   Users,
   Star,
@@ -33,31 +31,8 @@ import {
   Youtube,
   ExternalLink,
   Calendar as CalendarIcon,
-  Clock,
-  MapPin,
-  ChevronLeft,
-  ChevronRight,
-  Headphones,
-  Volume2,
-  Mic,
 } from "lucide-react";
 
-interface CalendarEvent {
-  id: string;
-  title: string;
-  instructor: string;
-  date: Date;
-  time: string;
-  duration: string;
-  location: string;
-  price: number;
-  spotsLeft: number;
-  totalSpots: number;
-  level: "Beginner" | "Intermediate" | "Advanced";
-  category: "Workshop" | "Masterclass" | "Live Event" | "Course";
-  description: string;
-  rating: number;
-}
 
 export default function Agency() {
   const { user } = useAuth();
@@ -65,7 +40,7 @@ export default function Agency() {
     name: "",
     email: "",
     artistName: "",
-    genre: "",
+    phone: "",
     message: "",
   });
 
@@ -100,18 +75,8 @@ export default function Agency() {
     }
   };
 
-  // Calendar state
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [hoveredEvent, setHoveredEvent] = useState<CalendarEvent | null>(null);
-  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
-  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
-  const [bookingModalOpen, setBookingModalOpen] = useState(false);
-  const [selectedBookingEvent, setSelectedBookingEvent] =
-    useState<CalendarEvent | null>(null);
   const [artistBookingModalOpen, setArtistBookingModalOpen] = useState(false);
-  const [artistSelectionModalOpen, setArtistSelectionModalOpen] = useState(false);
   const [selectedArtist, setSelectedArtist] = useState<any>(null);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -134,7 +99,7 @@ export default function Agency() {
    *    - ID → Deal/Contact ID
    *    - name → Artist Stage Name
    *    - realName → Contact Full Name
-   *    - genre → Custom Field "Genre"
+   *    - genre �� Custom Field "Genre"
    *    - followers → Custom Field "Social Following"
    *    - bookingRate → Deal Amount
    *    - status → Deal Stage
@@ -335,208 +300,15 @@ export default function Agency() {
     },
   ];
 
-  // Calendar data and functions
-  const events: CalendarEvent[] = [
-    {
-      id: "1",
-      title: "DJ Mixing Workshop",
-      instructor: "Marcus Rodriguez",
-      date: new Date(2024, 0, 15),
-      time: "19:00",
-      duration: "3 hours",
-      location: "Studio A",
-      price: 89,
-      spotsLeft: 3,
-      totalSpots: 12,
-      level: "Beginner",
-      category: "Workshop",
-      description:
-        "Learn the basics of DJ mixing including beatmatching and transitions.",
-      rating: 4.8,
-    },
-    {
-      id: "2",
-      title: "Turntablism Masterclass",
-      instructor: "DJ Luna",
-      date: new Date(2024, 0, 18),
-      time: "20:00",
-      duration: "4 hours",
-      location: "Main Studio",
-      price: 149,
-      spotsLeft: 1,
-      totalSpots: 8,
-      level: "Advanced",
-      category: "Masterclass",
-      description: "Master advanced turntable techniques and scratching.",
-      rating: 4.9,
-    },
-    {
-      id: "3",
-      title: "Electronic Production",
-      instructor: "Alex Waves",
-      date: new Date(2024, 0, 20),
-      time: "14:00",
-      duration: "6 hours",
-      location: "Production Lab",
-      price: 199,
-      spotsLeft: 5,
-      totalSpots: 10,
-      level: "Intermediate",
-      category: "Course",
-      description: "Create professional electronic tracks with industry tools.",
-      rating: 4.7,
-    },
-  ];
-
-  const getDaysInMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  };
-
-  const getFirstDayOfMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  };
-
-  const getEventsForDate = (date: Date) => {
-    return events.filter(
-      (event) =>
-        event.date.getDate() === date.getDate() &&
-        event.date.getMonth() === date.getMonth() &&
-        event.date.getFullYear() === date.getFullYear(),
-    );
-  };
-
-  const navigateMonth = (direction: "prev" | "next") => {
-    setCurrentDate((prev) => {
-      const newDate = new Date(prev);
-      if (direction === "prev") {
-        newDate.setMonth(prev.getMonth() - 1);
-      } else {
-        newDate.setMonth(prev.getMonth() + 1);
-      }
-      return newDate;
-    });
-  };
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case "Workshop":
-        return "bg-blue-500";
-      case "Masterclass":
-        return "bg-purple-500";
-      case "Live Event":
-        return "bg-pink-500";
-      case "Course":
-        return "bg-green-500";
-      default:
-        return "bg-gold-500";
-    }
-  };
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case "Workshop":
-        return <Headphones className="w-3 h-3" />;
-      case "Masterclass":
-        return <Star className="w-3 h-3" />;
-      case "Live Event":
-        return <Music className="w-3 h-3" />;
-      case "Course":
-        return <Volume2 className="w-3 h-3" />;
-      default:
-        return <CalendarIcon className="w-3 h-3" />;
-    }
-  };
-
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case "Beginner":
-        return "border-l-green-400";
-      case "Intermediate":
-        return "border-l-yellow-400";
-      case "Advanced":
-        return "border-l-red-400";
-      default:
-        return "border-l-gray-400";
-    }
-  };
-
-  const handleEventHover = (
-    event: CalendarEvent,
-    mouseEvent: React.MouseEvent,
-  ) => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
-    }
-    setHoveredEvent(event);
-    setHoverPosition({ x: mouseEvent.clientX, y: mouseEvent.clientY });
-  };
-
-  const handleEventLeave = () => {
-    const timeout = setTimeout(() => {
-      setHoveredEvent(null);
-    }, 200);
-    setHoverTimeout(timeout);
-  };
-
-  const handleTooltipEnter = () => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
-    }
-  };
-
-  const handleTooltipLeave = () => {
-    setHoveredEvent(null);
-  };
-
-  const handleBookEvent = (event: CalendarEvent) => {
-    if (!user) {
-      return;
-    }
-    setSelectedBookingEvent(event);
-    setBookingModalOpen(true);
-    setHoveredEvent(null);
-  };
-
   const handleBookArtist = (artist: any) => {
     setSelectedArtist(artist);
     setArtistBookingModalOpen(true);
   };
 
-  const handleDateClick = (clickedDate: Date) => {
-    setSelectedDate(clickedDate);
-    setArtistSelectionModalOpen(true);
-  };
-
-  const handleArtistSelection = (artist: any) => {
-    setSelectedArtist(artist);
-    setArtistSelectionModalOpen(false);
-    setArtistBookingModalOpen(true);
-  };
-
-  const daysInMonth = getDaysInMonth(currentDate);
-  const firstDay = getFirstDayOfMonth(currentDate);
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
-      <section className="relative min-h-[80vh] sm:min-h-screen overflow-hidden bg-black -mt-16 pt-16">
+      <section className="relative min-h-[100vh] sm:min-h-screen overflow-hidden bg-black -mt-16 pt-16">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -556,24 +328,24 @@ export default function Agency() {
           <div className="absolute top-60 right-40 w-3 h-3 bg-yellow-400 rounded-full animate-pulse opacity-50"></div>
         </div>
 
-        <div className="relative container mx-auto px-4 py-16 sm:py-20 lg:py-32 min-h-[80vh] sm:min-h-screen flex items-center z-10">
+        <div className="relative container mx-auto px-4 py-8 sm:py-16 lg:py-32 min-h-[100vh] sm:min-h-screen flex items-center z-10">
           <div className="max-w-6xl mx-auto w-full">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8 text-white">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="space-y-6 sm:space-y-8 text-white text-center lg:text-left">
                 <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/30 hover:bg-cyan-500/30 backdrop-blur-sm">
                   <Users className="w-3 h-3 mr-1" />
                   Elite Artist Representation
                 </Badge>
 
-                <div className="space-y-6">
-                  <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                <div className="space-y-4 sm:space-y-6">
+                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight">
                     <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
                       RANDOBA
                     </span>
                     <br />
                     <span className="text-white">Artist Agency</span>
                   </h1>
-                  <p className="text-xl text-gray-200 max-w-lg leading-relaxed">
+                  <p className="text-base sm:text-lg lg:text-xl text-gray-200 max-w-full lg:max-w-lg leading-relaxed">
                     Your talent is flawless - now it's time to turn it
                     into a powerful brand. <br />
                     We take DJs beyond their usual stages and fees,
@@ -611,7 +383,7 @@ export default function Agency() {
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-3 gap-6 pt-8">
+                <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-6 sm:pt-8">
                   {[
                     { number: "50+", label: "Elite Artists", icon: Users },
                     { number: "1000+", label: "Global Events", icon: Music },
@@ -619,24 +391,24 @@ export default function Agency() {
                   ].map((stat, index) => (
                     <div key={index} className="text-center group">
                       <div className="relative">
-                        <stat.icon className="w-8 h-8 text-cyan-400 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                        <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 mx-auto mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300" />
                         <div className="absolute inset-0 bg-cyan-400/20 blur-xl rounded-full group-hover:bg-cyan-400/40 transition-all duration-300"></div>
                       </div>
-                      <div className="text-3xl font-bold text-white">
+                      <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
                         {stat.number}
                       </div>
-                      <div className="text-sm text-gray-300">{stat.label}</div>
+                      <div className="text-xs sm:text-sm text-gray-300">{stat.label}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-700">
+              <div className="relative mt-8 lg:mt-0">
+                <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-4 sm:p-6 lg:p-8 border border-white/10 shadow-2xl transform rotate-0 lg:rotate-3 hover:rotate-0 transition-transform duration-700">
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-3xl"></div>
                   <div className="relative space-y-6">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold text-white">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
+                      <h3 className="text-lg sm:text-xl font-bold text-white">
                         Agency Highlights
                       </h3>
                       <Badge className="bg-green-500/20 text-green-300 border-green-400/30">
@@ -672,7 +444,7 @@ export default function Agency() {
       </section>
 
       {/* Agency Philosophy Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
@@ -688,14 +460,14 @@ export default function Agency() {
         </div>
 
         <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white">
               Our{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Philosophy: a reliable support at every stage of your growth
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Stop being just a good DJ - it's time to become an
               in-demand artist. In a highly competitive industry, we
               give you an advantage: strategy, connections, and media
@@ -703,18 +475,18 @@ export default function Agency() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4 group p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
-                    <Heart className="w-6 h-6 text-white" />
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 group p-4 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25 mx-auto sm:mx-0">
+                    <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
                       Artist Development
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                       From your first original tracks to a unique
                       image - we help you stand out and secure your
                       spot at the top. We build a personalized path to
@@ -723,15 +495,15 @@ export default function Agency() {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4 group p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/25">
-                    <Globe className="w-6 h-6 text-white" />
+                <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 group p-4 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/25 mx-auto sm:mx-0">
+                    <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
                       Access to New Stages
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                       We connect you with prestigious festivals,
                       clubs, and premium events that thousands of DJs
                       aspire to play.
@@ -739,15 +511,15 @@ export default function Agency() {
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4 group p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/25">
-                    <Zap className="w-6 h-6 text-white" />
+                <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 group p-4 sm:p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/25 mx-auto sm:mx-0">
+                    <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
                       Ongoing Growth
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
                       Your focus is the music. Our focus is your
                       progress, new contracts, and growing performance
                       fees.
@@ -777,28 +549,28 @@ export default function Agency() {
       {/* Artist Roster Section */}
       <section
         id="artist-roster"
-        className="py-20 bg-black relative overflow-hidden"
+        className="py-12 sm:py-16 lg:py-20 bg-black relative overflow-hidden"
       >
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-900/20 to-purple-900/20"></div>
         </div>
 
         <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white">
               Our Elite{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Roster
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Meet the extraordinary artists who define the future of electronic
               music.
             </p>
           </div>
 
           {/* Artist Grid - Optimized for CRM Management */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {artists.map((artist, index) => (
               <Card
                 key={artist.id}
@@ -806,7 +578,7 @@ export default function Agency() {
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 {/* Compact Image Section */}
-                <div className="relative h-48 sm:h-52 lg:h-48 overflow-hidden">
+                <div className="relative h-40 sm:h-48 lg:h-52 xl:h-48 overflow-hidden">
                   <img
                     src={artist.image}
                     alt={artist.name}
@@ -815,32 +587,32 @@ export default function Agency() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
 
                   {/* Floating Badges */}
-                  <div className="absolute top-3 right-3">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
                     <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-400/30 text-xs backdrop-blur-sm">
                       <Users className="w-3 h-3 mr-1" />
                       {artist.followers}
                     </Badge>
                   </div>
 
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
                     <Badge className="bg-purple-500/20 text-purple-300 border-purple-400/30 text-xs backdrop-blur-sm">
                       {artist.genre}
                     </Badge>
                   </div>
 
                   {/* Artist Name Overlay */}
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <h3 className="text-lg font-bold text-white truncate">
+                  <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3">
+                    <h3 className="text-base sm:text-lg font-bold text-white truncate">
                       {artist.name}
                     </h3>
-                    <p className="text-sm text-gray-300 truncate">
+                    <p className="text-xs sm:text-sm text-gray-300 truncate">
                       {artist.realName}
                     </p>
                   </div>
                 </div>
 
                 {/* Compact Content Section */}
-                <CardContent className="p-4 space-y-3">
+                <CardContent className="p-3 sm:p-4 space-y-2 sm:space-y-3">
                   {/* Description */}
                   <p className="text-gray-300 text-sm leading-relaxed line-clamp-2">
                     {artist.description}
@@ -928,9 +700,9 @@ export default function Agency() {
           </div>
 
           {/* Load More Artists - CRM Integration Ready */}
-          <div className="text-center mt-12">
-            <div className="inline-flex items-center space-x-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-3">
-              <span className="text-gray-300 text-sm">
+          <div className="text-center mt-8 sm:mt-12">
+            <div className="flex flex-col sm:inline-flex sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-3 sm:px-6">
+              <span className="text-gray-300 text-xs sm:text-sm">
                 Showing {artists.length} of {totalArtists}+ artists
               </span>
               <Button
@@ -947,7 +719,7 @@ export default function Agency() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2">
-              🔗 Powered by Bitrix24 CRM Integration
+              ���� Powered by Bitrix24 CRM Integration
             </p>
           </div>
 
@@ -955,7 +727,7 @@ export default function Agency() {
       </section>
 
       {/* Terms of Cooperation Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-radial from-cyan-500/10 to-transparent rounded-full"></div>
           <div className="absolute bottom-20 left-20 w-72 h-72 bg-gradient-radial from-purple-500/10 to-transparent rounded-full"></div>
@@ -971,14 +743,13 @@ export default function Agency() {
         </div>
 
         <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
-              Partnership{" "}
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white">
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                Terms
+                RANDOBA - partnership that drives your career
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Partnership with RANDOBA isn't just a formality - it's
               your personal career launchpad. We turn your ambitions
               into real results, opening doors to a world where your
@@ -986,7 +757,7 @@ export default function Agency() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
             {cooperationTerms.map((term, index) => (
               <Card
                 key={index}
@@ -994,15 +765,15 @@ export default function Agency() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
-                    <term.icon className="w-8 h-8 text-white" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
+                    <term.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
                   </div>
-                  <CardTitle className="text-xl text-white">
+                  <CardTitle className="text-lg sm:text-xl text-white">
                     {term.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <CardDescription className="text-gray-300 leading-relaxed">
+                  <CardDescription className="text-sm sm:text-base text-gray-300 leading-relaxed">
                     {term.description}
                   </CardDescription>
                 </CardContent>
@@ -1010,25 +781,81 @@ export default function Agency() {
             ))}
           </div>
 
+          {/* FAQ Section */}
+          <div className="max-w-4xl mx-auto mb-8 sm:mb-12 lg:mb-16">
+            <div className="text-center mb-6 sm:mb-8 lg:mb-12">
+              <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold mb-4 sm:mb-6 text-white px-4 sm:px-0">
+                We don't just book gigs -{" "}
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  we create legends
+                </span>
+              </h3>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
+                Your success is our mission. Here's how we transform talented DJs into industry icons with strategic career development and premium opportunities.
+              </p>
+            </div>
+
+            <div className="space-y-4 sm:space-y-6">
+              <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <h4 className="text-lg sm:text-xl font-bold text-cyan-400 mb-3 sm:mb-4">
+                    Struggling to break into bigger stages?
+                  </h4>
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                    We connect you to prestigious clubs, festivals,
+                    and premium events where top-tier artists perform.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <h4 className="text-lg sm:text-xl font-bold text-cyan-400 mb-3 sm:mb-4">
+                    Your tracks aren't getting noticed?
+                  </h4>
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                    We turn your style into a powerful brand and
+                    promote it across social media so you're seen and
+                    heard.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <h4 className="text-lg sm:text-xl font-bold text-cyan-400 mb-3 sm:mb-4">
+                    No stable gigs or income?
+                  </h4>
+                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                    We take care of booking, strategy, and full-scale
+                    artist management so your music brings both
+                    recognition and profit.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
           {/* Partnership Request Form */}
           <div className="max-w-4xl mx-auto">
             <Card className="bg-white/5 backdrop-blur-sm border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
-              <div className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 p-8 text-white text-center relative overflow-hidden">
+              <div className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 p-4 sm:p-6 lg:p-8 text-white text-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/90 via-purple-600/90 to-pink-600/90"></div>
                 <div className="relative">
-                  <h3 className="text-3xl font-bold mb-4">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4">
                     Join the RANDOBA Family
                   </h3>
-                  <p className="text-xl opacity-90">
-                    Ready to take your career to the next level? Let's create
-                    something extraordinary together.
+                  <p className="text-sm sm:text-lg lg:text-xl opacity-90">
+                    Looking for bigger stages, higher fees, and
+                    greater recognition? Apply now - and receive your
+                    custom career growth
                   </p>
                 </div>
               </div>
 
-              <CardContent className="p-8 bg-gray-900/50">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
+              <CardContent className="p-4 sm:p-6 lg:p-8 bg-gray-900/50">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-200 mb-2">
                         Full Name *
@@ -1086,19 +913,20 @@ export default function Agency() {
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-200 mb-2">
-                        Primary Genre *
+                        Phone Number *
                       </label>
                       <Input
+                        type="tel"
                         required
-                        value={formData.genre}
+                        value={formData.phone}
                         onChange={(e) =>
                           setFormData((prev) => ({
                             ...prev,
-                            genre: e.target.value,
+                            phone: e.target.value,
                           }))
                         }
                         className="bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-cyan-400/50"
-                        placeholder="e.g. Progressive House, Techno"
+                        placeholder="+1 (555) 123-4567"
                       />
                     </div>
                   </div>
@@ -1140,293 +968,12 @@ export default function Agency() {
         </div>
       </section>
 
-      {/* Events Calendar Section */}
-      <section className="py-16 lg:py-20 bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8 lg:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
-              Book Your{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent underline decoration-2 md:decoration-4 underline-offset-4 md:underline-offset-8">
-                Next Event
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-300 max-w-xl mx-auto">
-              Click on any date to book an artist for your event. Tap existing events to see workshop details.
-            </p>
-          </div>
-
-          {/* Calendar */}
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-white/5 backdrop-blur-xl border-white/10 shadow-2xl overflow-hidden">
-              <CardHeader className="p-4 lg:p-6">
-                <div className="flex items-center justify-between">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigateMonth("prev")}
-                    className="border-white/20 text-white hover:bg-white/10 p-2"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </Button>
-
-                  <CardTitle className="text-lg sm:text-xl lg:text-2xl font-bold text-center text-white">
-                    {monthNames[currentDate.getMonth()]}{" "}
-                    {currentDate.getFullYear()}
-                  </CardTitle>
-
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigateMonth("next")}
-                    className="border-white/20 text-white hover:bg-white/10 p-2"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
-                </div>
-              </CardHeader>
-
-              <CardContent className="p-0 overflow-x-auto">
-                {/* Day Headers */}
-                <div className="grid grid-cols-7 border-b border-white/20 min-w-full">
-                  {dayNames.map((day) => (
-                    <div
-                      key={day}
-                      className="p-2 sm:p-4 text-center font-semibold text-white border-r border-white/20 last:border-r-0 text-xs sm:text-sm"
-                    >
-                      <span className="hidden sm:inline">{day}</span>
-                      <span className="sm:hidden">{day.substring(0, 1)}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Calendar Days */}
-                <div className="grid grid-cols-7 min-w-full">
-                  {/* Empty cells for days before month starts */}
-                  {Array.from({ length: firstDay }, (_, index) => (
-                    <div
-                      key={`empty-${index}`}
-                      className="h-16 sm:h-20 lg:h-24 border-r border-b border-white/20 last:border-r-0"
-                    ></div>
-                  ))}
-
-                  {/* Days of the month */}
-                  {Array.from({ length: daysInMonth }, (_, index) => {
-                    const day = index + 1;
-                    const cellDate = new Date(
-                      currentDate.getFullYear(),
-                      currentDate.getMonth(),
-                      day,
-                    );
-                    const dayEvents = getEventsForDate(cellDate);
-                    const isToday =
-                      cellDate.toDateString() === new Date().toDateString();
-
-                    return (
-                      <div
-                        key={day}
-                        className={`h-16 sm:h-20 lg:h-24 border-r border-b border-white/20 last:border-r-0 p-1 sm:p-2 relative overflow-hidden hover:bg-white/10 transition-colors cursor-pointer ${
-                          isToday ? "bg-cyan-500/20" : ""
-                        }`}
-                        onClick={() => handleDateClick(cellDate)}
-                      >
-                        <div
-                          className={`text-xs sm:text-sm font-medium mb-1 ${isToday ? "text-cyan-400 font-bold" : "text-white"}`}
-                        >
-                          {day}
-                        </div>
-
-                        <div className="space-y-1">
-                          {dayEvents
-                            .slice(0, window.innerWidth < 640 ? 1 : 3)
-                            .map((event, eventIndex) => (
-                              <div
-                                key={event.id}
-                                className={`text-xs p-1 rounded cursor-pointer transition-all hover:scale-105 border-l-2 ${getCategoryColor(event.category)} ${getLevelColor(event.level)} bg-black/80 text-white truncate`}
-                                onMouseEnter={(e) => handleEventHover(event, e)}
-                                onMouseLeave={handleEventLeave}
-                                onMouseMove={(e) =>
-                                  setHoverPosition({
-                                    x: e.clientX,
-                                    y: e.clientY,
-                                  })
-                                }
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleEventHover(event, e);
-                                }}
-                              >
-                                <div className="flex items-center space-x-1">
-                                  <span className="hidden sm:inline">
-                                    {getCategoryIcon(event.category)}
-                                  </span>
-                                  <span className="truncate text-xs">
-                                    {event.title}
-                                  </span>
-                                </div>
-                              </div>
-                            ))}
-
-                          {dayEvents.length >
-                            (window.innerWidth < 640 ? 1 : 3) && (
-                            <div className="text-xs text-cyan-400 font-medium">
-                              +
-                              {dayEvents.length -
-                                (window.innerWidth < 640 ? 1 : 3)}{" "}
-                              more
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Legend */}
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-              {["Workshop", "Masterclass", "Live Event", "Course"].map(
-                (category) => (
-                  <div key={category} className="flex items-center space-x-2">
-                    <div
-                      className={`w-4 h-4 rounded ${getCategoryColor(category)}`}
-                    ></div>
-                    <span className="text-sm text-gray-300">{category}</span>
-                  </div>
-                ),
-              )}
-            </div>
-          </div>
-
-          {/* Hover Tooltip */}
-          {hoveredEvent && (
-            <div
-              className="fixed z-50 bg-gray-900/95 backdrop-blur-sm border border-white/20 rounded-lg p-4 shadow-2xl max-w-xs"
-              style={{
-                left: `${hoverPosition.x + 10}px`,
-                top: `${hoverPosition.y - 100}px`,
-                transform:
-                  hoverPosition.x > window.innerWidth - 300
-                    ? "translateX(-100%)"
-                    : "none",
-              }}
-              onMouseEnter={handleTooltipEnter}
-              onMouseLeave={handleTooltipLeave}
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Badge className="bg-white/10 text-cyan-300 border-cyan-400/30">
-                    {getCategoryIcon(hoveredEvent.category)}
-                    <span className="ml-1">{hoveredEvent.category}</span>
-                  </Badge>
-                  <Badge
-                    className={`${
-                      hoveredEvent.level === "Beginner"
-                        ? "bg-green-50 text-green-600 border-green-200"
-                        : hoveredEvent.level === "Intermediate"
-                          ? "bg-yellow-50 text-yellow-600 border-yellow-200"
-                          : "bg-red-50 text-red-600 border-red-200"
-                    }`}
-                  >
-                    {hoveredEvent.level}
-                  </Badge>
-                </div>
-
-                <h3 className="font-bold text-white">{hoveredEvent.title}</h3>
-                <p className="text-sm text-gray-300">
-                  with {hoveredEvent.instructor}
-                </p>
-
-                <div className="space-y-1 text-xs">
-                  <div className="flex items-center text-gray-300">
-                    <Clock className="w-3 h-3 mr-2 text-cyan-400" />
-                    {hoveredEvent.time} • {hoveredEvent.duration}
-                  </div>
-                  <div className="flex items-center text-gray-300">
-                    <MapPin className="w-3 h-3 mr-2 text-cyan-400" />
-                    {hoveredEvent.location}
-                  </div>
-                  <div className="flex items-center text-gray-300">
-                    <Users className="w-3 h-3 mr-2 text-cyan-400" />
-                    {hoveredEvent.spotsLeft} spots left
-                  </div>
-                  <div className="flex items-center justify-between pt-2">
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                      <span className="text-xs text-white">
-                        {hoveredEvent.rating}
-                      </span>
-                    </div>
-                    <span className="font-bold text-cyan-400">
-                      ${hoveredEvent.price}
-                    </span>
-                  </div>
-                </div>
-
-                <Button
-                  size="sm"
-                  className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:from-cyan-600 hover:to-purple-700 font-semibold text-xs"
-                  onClick={() => handleBookEvent(hoveredEvent)}
-                >
-                  Book Now
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {/* Booking Modal */}
-          <BookingModal
-            isOpen={bookingModalOpen}
-            onClose={() => setBookingModalOpen(false)}
-            item={
-              selectedBookingEvent
-                ? {
-                    id: selectedBookingEvent.id,
-                    title: selectedBookingEvent.title,
-                    instructor: selectedBookingEvent.instructor,
-                    date: selectedBookingEvent.date.toLocaleDateString(
-                      "en-US",
-                      {
-                        weekday: "long",
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      },
-                    ),
-                    time: selectedBookingEvent.time,
-                    duration: selectedBookingEvent.duration,
-                    location: selectedBookingEvent.location,
-                    price: selectedBookingEvent.price,
-                    type: "event",
-                  }
-                : null
-            }
-          />
-
-          {/* Artist Selection Modal */}
-          <ArtistSelectionModal
-            isOpen={artistSelectionModalOpen}
-            onClose={() => {
-              setArtistSelectionModalOpen(false);
-              setSelectedDate(null);
-            }}
-            onSelectArtist={handleArtistSelection}
-            selectedDate={selectedDate}
-            artists={artists}
-          />
-
-          {/* Artist Booking Modal */}
-          <ArtistBookingModal
-            isOpen={artistBookingModalOpen}
-            onClose={() => {
-              setArtistBookingModalOpen(false);
-              setSelectedDate(null);
-            }}
-            artist={selectedArtist}
-            preSelectedDate={selectedDate}
-          />
-        </div>
-      </section>
+      {/* Artist Booking Modal */}
+      <ArtistBookingModal
+        isOpen={artistBookingModalOpen}
+        onClose={() => setArtistBookingModalOpen(false)}
+        artist={selectedArtist}
+      />
     </div>
   );
 }
